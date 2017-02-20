@@ -27,12 +27,6 @@ public class LoginController {
         }else {
             error = "请先登录";
         }
-        sendResponse(request,response,genMsgObj(FAILED,error));
     }
-
-
-
-
-
 
 }

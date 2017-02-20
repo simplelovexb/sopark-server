@@ -2,6 +2,11 @@ package cn.suxiangbao.sopark.service;
 
 import cn.suxiangbao.sopark.entity.User;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -15,29 +20,31 @@ public interface UserService {
      * 创建用户
      * @param user
      */
-    public User createUser(User user);
+    public User createUser(HttpServletRequest request, HttpServletResponse response, User user);
 
-    public User updateUser(User user);
+    public User updateUser(HttpServletRequest request, HttpServletResponse response,User user);
 
-    public void deleteUser(Long userId);
+    public void deleteUser(HttpServletRequest request, HttpServletResponse response,Long userId);
 
     /**
      * 修改密码
      * @param userId
      * @param newPassword
      */
-    public void changePassword(Long userId, String newPassword);
+    public void changePassword(HttpServletRequest request, HttpServletResponse response,Long userId, String newPassword);
 
 
-    User findOne(Long userId);
+    User findOne(HttpServletRequest request, HttpServletResponse response,Long userId);
 
-    List<User> findAll();
+    List<User> findAll(HttpServletRequest request, HttpServletResponse response);
 
     /**
      * 根据用户名查找用户
      * @param username
      * @return
      */
+    public User findByUsername(ServletRequest request, ServletResponse response, String username);
     public User findByUsername(String username);
+
 
 }

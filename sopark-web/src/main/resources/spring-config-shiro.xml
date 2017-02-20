@@ -114,7 +114,7 @@
         </property>
         <property name="filterChainDefinitions">
             <value>
-
+                /anon/** = anon
                 /getTemplateNearData = anon
                 /login = authc
                 /logout = logout

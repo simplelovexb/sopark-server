@@ -77,7 +77,7 @@
 
     <aop:config expose-proxy="true" proxy-target-class="true">
         <!-- 只对业务逻辑层实施事务 -->
-        <aop:pointcut id="txPointcut" expression="execution(* cn.suxiangbao.sopark.chapter16..service..*+.*(..))"/>
+        <aop:pointcut id="txPointcut" expression="execution(* cn.suxiangbao.sopark..service..*+.*(..))"/>
         <aop:advisor id="txAdvisor" advice-ref="txAdvice" pointcut-ref="txPointcut"/>
     </aop:config>
 

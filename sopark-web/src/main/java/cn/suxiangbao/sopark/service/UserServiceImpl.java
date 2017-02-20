@@ -5,6 +5,10 @@ import cn.suxiangbao.sopark.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -25,19 +29,20 @@ public class UserServiceImpl implements UserService {
      * 创建用户
      * @param user
      */
-    public User createUser(User user) {
+    public User createUser(HttpServletRequest request, HttpServletResponse response,User user) {
         //加密密码
         passwordHelper.encryptPassword(user);
+
         return userDao.createUser(user);
     }
 
     @Override
-    public User updateUser(User user) {
+    public User updateUser(HttpServletRequest request, HttpServletResponse response,User user) {
         return userDao.updateUser(user);
     }
 
     @Override
-    public void deleteUser(Long userId) {
+    public void deleteUser(HttpServletRequest request, HttpServletResponse response,Long userId) {
         userDao.deleteUser(userId);
     }
 
@@ -46,7 +51,7 @@ public class UserServiceImpl implements UserService {
      * @param userId
      * @param newPassword
      */
-    public void changePassword(Long userId, String newPassword) {
+    public void changePassword(HttpServletRequest request, HttpServletResponse response,Long userId, String newPassword) {
         User user =userDao.findOne(userId);
         user.setPassword(newPassword);
         passwordHelper.encryptPassword(user);
@@ -54,12 +59,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findOne(Long userId) {
+    public User findOne(HttpServletRequest request, HttpServletResponse response,Long userId) {
         return userDao.findOne(userId);
     }
 
     @Override
-    public List<User> findAll() {
+    public List<User> findAll(HttpServletRequest request, HttpServletResponse response) {
         return userDao.findAll();
     }
 
@@ -68,12 +73,12 @@ public class UserServiceImpl implements UserService {
      * @param username
      * @return
      */
-    public User findByUsername(String username) {
+    public User findByUsername(ServletRequest request, ServletResponse response, String username) {
         return userDao.findByUsername(username);
     }
 
-
-
-
-
+    @Override
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
+    }
 }
