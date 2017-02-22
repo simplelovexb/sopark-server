@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/mongo
+		http://www.springframework.org/schema/data/mongo/spring-mongo-1.8.xsd">
+
+	<!--<bean id="mongoTag" class="com.mongodb.Tag">-->
+		<!--<constructor-arg index="0" value="IDC"/>-->
+		<!--<constructor-arg index="1" value="${mongo.replica.tagValue}"/>-->
+	<!--</bean>-->
+	<!--<bean id="mongoTagSet" class="com.mongodb.TagSet">-->
+		<!--<constructor-arg ref="mongoTag"/>-->
+	<!--</bean>-->
+	<!--<bean id="readPreference" class="com.mongodb.TaggableReadPreference.NearestReadPreference">-->
+		<!--<constructor-arg ref="mongoTagSet"/>-->
+	<!--</bean>-->
+
+	<!-- liveshow list database config start  -->
+	<mongo:mongo-client id="mongoClient" replica-set="${mongo.replica.sopark}" credentials="${mongo.replica.sopark.credentials}">
+		<mongo:client-options connections-per-host="300"
+							  threads-allowed-to-block-for-connection-multiplier="5"
+							  socket-keep-alive="true"
+							  connect-timeout="5000"
+							  socket-timeout="5000"
+							  read-preference="NEAREST" />
+	</mongo:mongo-client>
+	<mongo:db-factory id="mongoDbFactory" mongo-ref="mongoClient" dbname="${mongo.replica.sopark.dbname}"/>
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="mongoDbFactory"  />
+		<!--<property name="writeConcern" value="ACKNOWLEDGED" />-->
+		<!--<property name="readPreference" ref="readPreference"/>-->
+	</bean>
+	<!-- liveshow list database config end -->
+
+
+
+</beans>
+

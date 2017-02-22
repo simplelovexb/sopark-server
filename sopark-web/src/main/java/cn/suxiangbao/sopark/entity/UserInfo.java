@@ -196,4 +196,20 @@ public class UserInfo {
                 ", phoneAuth=" + phoneAuth +
                 '}';
     }
+
+    public static class Field{
+        public static final String FIELD_UID = "uid";
+        public static final String FIELD_USERNAME = "username";
+        public static final String FIELD_NICK = "nick";
+        public static final String FIELD_EMAIL = "email";
+        public static final String FIELD_ICON = "icon";
+        public static final String FIELD_IDENTIFY_SIGN = "identifySign";
+        public static final String FIELD_REAL_NAME = "realName";
+        public static final String FIELD_AUTH_TYPE = "authType";
+        public static final String FIELD_PHONE_NUM = "phoneNum";
+        public static final String FIELD_ID_CARDS = "idCards";
+        public static final String FIELD_DRIVER_LICEBSES = "driverLicenses";
+        public static final String FIELD_EMAIL_AUTH = "emailAuth";
+        public static final String FIELD_PHONE_AUTH = "phoneAuth";
+    }
 }

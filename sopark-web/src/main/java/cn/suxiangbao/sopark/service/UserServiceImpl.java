@@ -1,7 +1,10 @@
 package cn.suxiangbao.sopark.service;
 
 import cn.suxiangbao.sopark.dao.UserDao;
+import cn.suxiangbao.sopark.dao.UserInfoMongoDao;
 import cn.suxiangbao.sopark.entity.User;
+import cn.suxiangbao.sopark.entity.UserInfo;
+import com.mongodb.WriteResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +27,8 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
     @Autowired
     private PasswordHelper passwordHelper;
-
+    @Autowired
+    private UserInfoMongoDao userInfoMongoDao;
     /**
      * 创建用户
      * @param user
@@ -32,8 +36,18 @@ public class UserServiceImpl implements UserService {
     public User createUser(HttpServletRequest request, HttpServletResponse response,User user) {
         //加密密码
         passwordHelper.encryptPassword(user);
+        userDao.createUser(user);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setAuthType(UserInfo.AuthType.NO_AUTH);
+        userInfo.setUid(user.getId());
+        userInfo.setUsername(user.getUsername());
+        try {
+            userInfoMongoDao.insert(userInfo);
 
-        return userDao.createUser(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
