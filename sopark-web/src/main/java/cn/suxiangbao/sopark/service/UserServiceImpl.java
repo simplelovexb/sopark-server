@@ -20,15 +20,14 @@ import java.util.List;
  * <p>Version: 1.0
  */
 @Service
-
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
     @Autowired
     private PasswordHelper passwordHelper;
-    @Autowired
-    private UserInfoMongoDao userInfoMongoDao;
+//    @Autowired
+//    private UserInfoMongoDao userInfoMongoDao;
     /**
      * 创建用户
      * @param user
@@ -41,12 +40,12 @@ public class UserServiceImpl implements UserService {
         userInfo.setAuthType(UserInfo.AuthType.NO_AUTH);
         userInfo.setUid(user.getId());
         userInfo.setUsername(user.getUsername());
-        try {
-            userInfoMongoDao.insert(userInfo);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            userInfoMongoDao.insert(userInfo);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return user;
     }
 

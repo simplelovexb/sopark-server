@@ -4,7 +4,6 @@ import cn.suxiangbao.sopark.dao.CarPortMongoDao;
 import cn.suxiangbao.sopark.entity.CarPort;
 import static cn.suxiangbao.sopark.http.BaseServletUtil.*;
 
-import cn.suxiangbao.sopark.mongo.MongoUtil;
 import com.mongodb.WriteResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

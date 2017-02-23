@@ -46,7 +46,7 @@ public class AnonController {
         sendResponse(request,response,genMsgObj(SUCCESS));
     }
 
-    @RequestMapping(value = "/isLogin",method = RequestMethod.POST)
+    @RequestMapping(value = "/isLogin",method = RequestMethod.GET)
     public void isLogin(HttpServletRequest request, HttpServletResponse response){
         Boolean isLogin = SecurityUtils.getSubject().isAuthenticated();
         if (isLogin){
@@ -56,7 +56,7 @@ public class AnonController {
         }
 
     }
-    @RequestMapping(value = "/getTemplateNearData",method = RequestMethod.POST)
+    @RequestMapping(value = "/getTemplateNearData",method = RequestMethod.GET)
     public void getTemplateNearData(HttpServletRequest request, HttpServletResponse response,
                                     @RequestParam(required = false) Double longitude,@RequestParam(required = false) Double latitude,
                                     @RequestParam(required = false) Double dis, @PageableDefault(value = 10, page = 0) Pageable page){

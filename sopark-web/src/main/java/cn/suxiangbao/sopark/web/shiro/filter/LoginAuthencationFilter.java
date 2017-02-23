@@ -23,4 +23,5 @@ public class LoginAuthencationFilter extends FormAuthenticationFilter{
         //we handled the success redirect directly, prevent the chain from continuing:
         return false;
     }
+
 }

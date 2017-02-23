@@ -1,5 +1,6 @@
 package cn.suxiangbao.sopark.web.controller;
 
+import cn.suxiangbao.sopark.http.BaseServletUtil;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ public class LoginController {
     public void showLoginForm(HttpServletRequest request, HttpServletResponse response) {
         String exceptionClassName = (String)request.getAttribute("shiroLoginFailure");
         String error = null;
+        int retcode = FAILED;
         if (exceptionClassName!=null) {
             if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
                 error = "用户名/密码错误";
@@ -26,7 +28,9 @@ public class LoginController {
             }
         }else {
             error = "请先登录";
+            retcode = UNLOGIN;
         }
+        sendResponse(request,response,genMsgObj(retcode,error));
     }
 
 }
