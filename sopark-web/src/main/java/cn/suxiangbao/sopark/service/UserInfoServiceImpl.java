@@ -2,6 +2,7 @@ package cn.suxiangbao.sopark.service;
 
 import cn.suxiangbao.sopark.dao.UserInfoMongoDao;
 import cn.suxiangbao.sopark.entity.CarPort;
+import cn.suxiangbao.sopark.entity.User;
 import cn.suxiangbao.sopark.entity.UserInfo;
 import com.mongodb.WriteResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+
 import static cn.suxiangbao.sopark.http.BaseServletUtil.*;
 
 /**
@@ -43,7 +46,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     public void update(HttpServletRequest request, HttpServletResponse response, UserInfo userInfo) {
         int retcode = SUCCESS;
         String msg = null;
+        userInfo.setUpdateDate(new Date());
         try {
+
             WriteResult result = userInfoMongoDao.insertOrUpdate(userInfo);
             if (result.getN() == 0){
                 msg = "user does not exist!";

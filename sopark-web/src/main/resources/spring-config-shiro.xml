@@ -120,6 +120,7 @@
                 /logout = logout
                 /authenticated = authc
                 /** = user,sysUser
+                /static/** = anon
             </value>
         </property>
     </bean>

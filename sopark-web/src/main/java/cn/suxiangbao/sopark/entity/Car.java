@@ -31,11 +31,19 @@ public class Car {
     private String licencePlate;
     private Date createDate;
     private Date updateDate;
-    private Long owner;
+    private Long uid;
     /**
-     * 证件
+     * 行驶证 size = 2
      */
-    private List<String> credentials;
+    private List<String> imgDriverLicence;
+    /**
+     *
+     */
+    private List<String> imgCarPic;
+    /**
+     * 年审照片
+     */
+    private String imgYearCheck;
     /**
      * 是否通过审核
      */
@@ -97,13 +105,36 @@ public class Car {
         this.updateDate = updateDate;
     }
 
-
-    public List<String> getCredentials() {
-        return credentials;
+    public Long getUid() {
+        return uid;
     }
 
-    public void setCredentials(List<String> credentials) {
-        this.credentials = credentials;
+    public void setUid(Long uid) {
+        this.uid = uid;
+    }
+
+    public List<String> getImgDriverLicence() {
+        return imgDriverLicence;
+    }
+
+    public void setImgDriverLicence(List<String> imgDriverLicence) {
+        this.imgDriverLicence = imgDriverLicence;
+    }
+
+    public List<String> getImgCarPic() {
+        return imgCarPic;
+    }
+
+    public void setImgCarPic(List<String> imgCarPic) {
+        this.imgCarPic = imgCarPic;
+    }
+
+    public String getImgYearCheck() {
+        return imgYearCheck;
+    }
+
+    public void setImgYearCheck(String imgYearCheck) {
+        this.imgYearCheck = imgYearCheck;
     }
 
     public Boolean getChecked() {
@@ -124,8 +155,10 @@ public class Car {
         if (cid != null ? !cid.equals(car.cid) : car.cid != null) return false;
         if (brand != null ? !brand.equals(car.brand) : car.brand != null) return false;
         if (version != null ? !version.equals(car.version) : car.version != null) return false;
-        if (licencePlate != null ? !licencePlate.equals(car.licencePlate) : car.licencePlate != null) return false;
-        return owner != null ? owner.equals(car.owner) : car.owner == null;
+        if (licencePlate != null ? !licencePlate.equals(car.licencePlate) : car.licencePlate != null)
+            return false;
+        return uid != null ? uid.equals(car.uid) : car.uid == null;
+
     }
 
     @Override
@@ -134,7 +167,7 @@ public class Car {
         result = 31 * result + (brand != null ? brand.hashCode() : 0);
         result = 31 * result + (version != null ? version.hashCode() : 0);
         result = 31 * result + (licencePlate != null ? licencePlate.hashCode() : 0);
-        result = 31 * result + (owner != null ? owner.hashCode() : 0);
+        result = 31 * result + (uid != null ? uid.hashCode() : 0);
         return result;
     }
 
@@ -148,12 +181,13 @@ public class Car {
                 ", licencePlate='" + licencePlate + '\'' +
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +
-                ", owner=" + owner +
-                ", credentials=" + credentials +
+                ", uid=" + uid +
+                ", imgDriverLicence=" + imgDriverLicence +
+                ", imgCarPic=" + imgCarPic +
+                ", imgYearCheck='" + imgYearCheck + '\'' +
                 ", isChecked=" + isChecked +
                 '}';
     }
-
     public static class Field{
         public static final String FIELD_CID = "cid";
         public static final String FIELD_ICON = "icon";
@@ -165,6 +199,10 @@ public class Car {
         public static final String FIELD_OWNER = "OWNER";
         public static final String FIELD_CREDENTIALS = "credentials";
         public static final String FIELD_IS_CHECKED = "isChecked";
-
     }
+
+
+
+
+
 }

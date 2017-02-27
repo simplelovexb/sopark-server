@@ -2,6 +2,7 @@ package cn.suxiangbao.sopark.entity;
 
 
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class UserInfo {
     /**
      * 身份的认证类型
      */
-    private AuthType authType;
+    private Integer authType;
     private String phoneNum;
     /**
      * 身份证照片 包含正反面
@@ -41,7 +42,8 @@ public class UserInfo {
      */
     private Boolean phoneAuth;
 
-
+    private Date createDate ;
+    private Date updateDate;
 
     /**
      * PASS 通过认证
@@ -127,11 +129,11 @@ public class UserInfo {
         this.realName = realName;
     }
 
-    public AuthType getAuthType() {
+    public Integer getAuthType() {
         return authType;
     }
 
-    public void setAuthType(AuthType authType) {
+    public void setAuthType(Integer authType) {
         this.authType = authType;
     }
 
@@ -175,7 +177,21 @@ public class UserInfo {
         this.phoneAuth = phoneAuth;
     }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
 
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 
     @Override
     public String toString() {
@@ -194,6 +210,8 @@ public class UserInfo {
                 ", driverLicenses=" + driverLicenses +
                 ", emailAuth=" + emailAuth +
                 ", phoneAuth=" + phoneAuth +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
                 '}';
     }
 
@@ -211,5 +229,8 @@ public class UserInfo {
         public static final String FIELD_DRIVER_LICEBSES = "driverLicenses";
         public static final String FIELD_EMAIL_AUTH = "emailAuth";
         public static final String FIELD_PHONE_AUTH = "phoneAuth";
+        public static final String FIELD_CREATE_DATE= "createDate";
+        public static final String FIELD_UPDATE_DATE= "updateDate";
+
     }
 }

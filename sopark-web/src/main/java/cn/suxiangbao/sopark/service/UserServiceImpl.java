@@ -12,6 +12,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,8 +27,8 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
     @Autowired
     private PasswordHelper passwordHelper;
-//    @Autowired
-//    private UserInfoMongoDao userInfoMongoDao;
+    @Autowired
+    private UserInfoMongoDao userInfoMongoDao;
     /**
      * 创建用户
      * @param user
@@ -37,15 +38,16 @@ public class UserServiceImpl implements UserService {
         passwordHelper.encryptPassword(user);
         userDao.createUser(user);
         UserInfo userInfo = new UserInfo();
-        userInfo.setAuthType(UserInfo.AuthType.NO_AUTH);
+        userInfo.setAuthType(UserInfo.AuthType.NO_AUTH.getValue());
         userInfo.setUid(user.getId());
         userInfo.setUsername(user.getUsername());
-//        try {
-//            userInfoMongoDao.insert(userInfo);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        userInfo.setCreateDate(new Date());
+        try {
+            userInfoMongoDao.insert(userInfo);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return user;
     }
 

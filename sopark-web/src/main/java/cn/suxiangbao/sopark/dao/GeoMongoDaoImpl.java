@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,14 +31,14 @@ public class GeoMongoDaoImpl implements GeoMongoDao {
     public void getNearCarPort(HttpServletRequest request , HttpServletResponse response,Double[] loc, Double dis , Pageable page) {
         int rescode = BaseServletUtil.SUCCESS;
         String msg = null;
-        List<CarPort> carPorts = Collections.emptyList();
+        List<CarPort> carPorts = new ArrayList<>();
 
         try{
             DBObject object = new BasicDBObject(CarPort.Field.FIELD_COORDINATE,
                     new BasicDBObject(MongoUtil.CMD_GEO_WITHIN,
                             new BasicDBObject(MongoUtil.GEO_CENTER_SPHERE,new Object[]{loc,dis})));
             object.put(CarPort.Field.FIELD_STATUS,CarPort.StatusEnum.CouldUse.getType());
-            DBCursor cursor = template.getCollection(Constants.Collection.COLLECTION_CARPORT).find(object).hint(CarPort.Field.FIELD_COORDINATE);
+            DBCursor cursor = template.getCollection(Constants.Collection.COLLECTION_CARPORT).find(object);
             cursor.skip(page.getOffset()).limit(page.getPageSize());
             while (cursor.hasNext()){
                 DBObject obj = cursor.next();
@@ -52,7 +53,7 @@ public class GeoMongoDaoImpl implements GeoMongoDao {
             rescode = BaseServletUtil.FAILED;
         }finally {
             if (rescode == BaseServletUtil.SUCCESS){
-                BaseServletUtil.sendResponse(request,response,BaseServletUtil.genMsgObj(rescode));
+                BaseServletUtil.sendResponse(request,response,BaseServletUtil.genMsgObj(rescode,msg,carPorts));
             }else {
                 BaseServletUtil.sendResponse(request,response,BaseServletUtil.genMsgObj(rescode,msg));
             }

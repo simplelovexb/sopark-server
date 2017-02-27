@@ -39,6 +39,8 @@ public class UserInfoController {
             sendResponse(request,response,genMsgObj(USERNAME_EXISTED,"用户不存在"));
             return;
         }
+        userInfo.setUid( user.getId());
+        userInfo.setUsername(user.getUsername());
         userInfoService.update(request,response,userInfo);
     }
 
@@ -67,37 +69,6 @@ public class UserInfoController {
         userInfoService.findByUsername(request,response,username);
     }
 
-    @RequestMapping(value = "/uploadIcon")
-    public void uploadHeader(@RequestParam("file") CommonsMultipartFile imgFile, HttpServletRequest request,@CurrentUser User user,
-                             HttpServletResponse response) {
 
-        if (user == null){
-            sendResponse(request,response,genMsgObj(FAILED,"参数错误"));
-            return;
-        }
-        if (imgFile.getBytes() == null || imgFile.getSize() == 0) {
-            sendResponse(request, response,
-                    genMsgObj(FAILED, "Req Param Not Right: imgFile.getBytes() == null || imgFile.getSize() == 0"));
-            return;
-        }
-        String fileName = imgFile.getFileItem().getName();
-        String fileType = StringUtils.substringAfterLast(fileName, ".");
-        if (!Constants.IMG_TYPE.contains(fileType)){
-            sendResponse(request,response,genMsgObj(FAILED,"文件类型错误，必须为“png,jpg,jpeg”的图片"));
-            return;
-        }
-        File file = new File(Constants.IMG_UPLOAD_PATH+user.getId()+"_icon."+fileType);
-        file.deleteOnExit();
-        int retcode = SUCCESS;
-        String msg= null;
-        try {
-            imgFile.transferTo(file);
-        } catch (IOException e) {
-            msg = e.getMessage();
-            retcode = FAILED;
-        }
-        sendResponse(request,response,genMsgObj(retcode,msg,Constants.IMG_REMOTE_PATH+user.getId()+"_icon."+fileType));
-
-    }
 
 }

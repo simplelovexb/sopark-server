@@ -2,8 +2,6 @@ package cn.suxiangbao.sopark.service;
 
 import cn.suxiangbao.sopark.dao.CarPortMongoDao;
 import cn.suxiangbao.sopark.entity.CarPort;
-import static cn.suxiangbao.sopark.http.BaseServletUtil.*;
-
 import com.mongodb.WriteResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +9,10 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
+
+import static cn.suxiangbao.sopark.http.BaseServletUtil.*;
 
 /**
  * Created by sxb on 2017/2/21.
@@ -27,11 +28,14 @@ public class CarPortServiceImpl implements CarPortService {
         int retcode = SUCCESS;
         String msg = null;
         try {
+            Date date = new Date();
             carPort.setOwner(uid);
             if (carPort.getStatus() ==null){
                 carPort.setStatus(CarPort.StatusEnum.CouldUse.getType());
                 carPort.setVerify(CarPort.VerifyEnum.UnVerify.getType());
             }
+            carPort.setCreateDate(date);
+            carPort.setUpdateDate(date);
             WriteResult result = carPortMongoDao.insert(carPort);
             resId = result.getUpsertedId();
 
@@ -70,6 +74,7 @@ public class CarPortServiceImpl implements CarPortService {
         int retcode = SUCCESS;
         String msg = null;
         try {
+            carPort.setUpdateDate(new Date());
             WriteResult result = carPortMongoDao.insertOrUpdate(carPort);
             if (result.getN() == 0){
                 msg = "carport not exit";
@@ -110,7 +115,8 @@ public class CarPortServiceImpl implements CarPortService {
             msg = e.getMessage();
             retcode = FAILED;
         }finally {
-            sendResponse(request,response,genMsgObj(retcode,msg,carPorts));
+            RetMsgObj ret = genMsgObj(retcode,msg,carPorts);
+            sendResponse(request,response,ret);
         }
     }
 }

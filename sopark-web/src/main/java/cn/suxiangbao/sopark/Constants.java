@@ -13,9 +13,9 @@ import java.util.List;
 public class Constants {
     public static final String CURRENT_USER = "user";
     public static final Integer DEFAULT_QUERY_LIMIT = 10;
-    public static final String DEFAULT_DISTANCE = "1.0"; //默认距离
-    public static final String IMG_UPLOAD_PATH="";
-    public static final String IMG_REMOTE_PATH="";
+    public static final Double DEFAULT_DISTANCE = 1.0; //默认距离
+    public static final String IMG_UPLOAD_PATH="E://static/";
+    public static final String IMG_REMOTE_PATH="http://172.26.40.2:8000/static/img/";
     public static final List<String> IMG_TYPE = Arrays.asList("jpg","png","jpeg");
     public static class Collection{
         public static final String COLLECTION_CARPORT = "carport";

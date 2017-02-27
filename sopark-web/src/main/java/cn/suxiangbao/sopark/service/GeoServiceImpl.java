@@ -22,7 +22,6 @@ public class GeoServiceImpl implements GeoService {
 
     @Override
     public void getNearCarPort(HttpServletRequest request , HttpServletResponse response, Double[] loc, Double dis, Pageable page) {
-
        geoMongoDao.getNearCarPort(request,response,loc,dis,page);
 
     }

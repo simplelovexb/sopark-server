@@ -1,7 +1,9 @@
 package cn.suxiangbao.sopark.entity;
 
 
+import javax.xml.crypto.Data;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2017/1/2.
@@ -26,6 +28,9 @@ public class CarPort {
     private Integer status ;
 
     private Integer verify;
+
+    private Date createDate;
+    private Date updateDate;
 
     public Long getPid() {
         return pid;
@@ -83,6 +88,22 @@ public class CarPort {
         this.verify = verify;
     }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
     @Override
     public String toString() {
         return "CarPort{" +
@@ -93,6 +114,8 @@ public class CarPort {
                 ", coordinate=" + Arrays.toString(coordinate) +
                 ", status=" + status +
                 ", verify=" + verify +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
                 '}';
     }
 
@@ -101,6 +124,10 @@ public class CarPort {
         public static final String FIELD_ID = "pid";
         public static final String FIELD_STATUS = "status";
         public static final String FIELD_OWNER = "owner";
+        public static final String FIELD_NAME = "name";
+        public static final String FIELD_COMMENT = "comment";
+        public static final String FIELD_PICS = "pic";
+
     }
 
     public enum StatusEnum {

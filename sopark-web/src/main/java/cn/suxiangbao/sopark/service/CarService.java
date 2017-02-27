@@ -16,7 +16,7 @@ public interface CarService {
 
     void update(HttpServletRequest request,HttpServletResponse response,Long uid,Car car);
 
-    void findOne(HttpServletRequest request,HttpServletResponse response,Long uid,Long pid);
+    void findOne(HttpServletRequest request,HttpServletResponse response,Long uid,Long cid);
 
     void findByPage(HttpServletRequest request, HttpServletResponse response,Long uid, Pageable page);
 }
