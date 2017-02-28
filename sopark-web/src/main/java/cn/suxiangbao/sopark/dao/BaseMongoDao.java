@@ -1,5 +1,6 @@
 package cn.suxiangbao.sopark.dao;
 
+import cn.suxiangbao.sopark.entity.Car;
 import cn.suxiangbao.sopark.mongo.MongoUtil;
 import com.mongodb.*;
 import org.apache.commons.collections.CollectionUtils;
@@ -9,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * mongodb操作模板类
@@ -18,6 +21,7 @@ import java.util.*;
  */
 public abstract class BaseMongoDao<T> {
 
+    protected AtomicLong cid ;
     private static Logger logger = LoggerFactory.getLogger(BaseMongoDao.class);
 
     public static final int ASC = 1;
@@ -46,6 +50,8 @@ public abstract class BaseMongoDao<T> {
         FIELD_PRIMARY_KEY = entityIdFieldName;
         this.entityClazz = clazz;
     }
+
+    public abstract void initMaxId();
 
     //插入
     public WriteResult insert(T t) throws Exception {
@@ -126,7 +132,7 @@ public abstract class BaseMongoDao<T> {
         AggregationOutput output = getCollection().aggregate(aggregateConditions);
         if (output != null || output.results() != null) {
             Iterator<DBObject> iterator = output.results().iterator();
-            if (iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 DBObject obj = iterator.next();
                 T e = MongoUtil.db2JavaObj(getTemplate(), entityClazz, obj,FIELD_PRIMARY_KEY);
                 list.add(e);
@@ -284,4 +290,6 @@ public abstract class BaseMongoDao<T> {
     protected DBCollection getCollection() {
         return getTemplate().getDb().getCollection(COLLECTION_NAME);
     }
+
+    public abstract long getNextId();
 }

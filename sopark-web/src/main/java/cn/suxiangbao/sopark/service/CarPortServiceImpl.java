@@ -30,6 +30,7 @@ public class CarPortServiceImpl implements CarPortService {
         try {
             Date date = new Date();
             carPort.setOwner(uid);
+            carPort.setPid(carPortMongoDao.getNextId());
             if (carPort.getStatus() ==null){
                 carPort.setStatus(CarPort.StatusEnum.CouldUse.getType());
                 carPort.setVerify(CarPort.VerifyEnum.UnVerify.getType());

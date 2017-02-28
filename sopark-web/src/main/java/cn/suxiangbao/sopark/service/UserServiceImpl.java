@@ -42,6 +42,8 @@ public class UserServiceImpl implements UserService {
         userInfo.setUid(user.getId());
         userInfo.setUsername(user.getUsername());
         userInfo.setCreateDate(new Date());
+        userInfo.setNick("新人宝宝");
+        userInfo.setIdentifySign("这个人很懒，什么都不写");
         try {
             userInfoMongoDao.insert(userInfo);
 

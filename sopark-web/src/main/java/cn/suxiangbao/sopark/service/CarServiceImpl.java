@@ -34,6 +34,7 @@ public class CarServiceImpl implements CarService {
         try {
             Date now = new Date();
             car.setUid(uid);
+            car.setCid(carMongoDao.getNextId());
             car.setCreateDate(now);
             car.setUpdateDate(now);
             WriteResult result = carMongoDao.insert(car);

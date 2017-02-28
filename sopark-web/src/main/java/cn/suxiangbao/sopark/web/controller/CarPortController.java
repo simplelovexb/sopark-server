@@ -2,8 +2,11 @@ package cn.suxiangbao.sopark.web.controller;
 
 import cn.suxiangbao.sopark.entity.CarPort;
 import cn.suxiangbao.sopark.entity.User;
+import cn.suxiangbao.sopark.json.JsonUtil;
 import cn.suxiangbao.sopark.service.CarPortService;
 import cn.suxiangbao.sopark.web.bind.annotation.CurrentUser;
+import com.google.common.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 import static cn.suxiangbao.sopark.http.BaseServletUtil.*;
 
 /**
@@ -24,6 +29,8 @@ public class CarPortController {
 
     @Autowired
     private CarPortService carPortService;
+    @Autowired
+    private JsonUtil jsonUtil;
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
     public void add(HttpServletRequest request, HttpServletResponse response, @CurrentUser User user, CarPort carPort){
@@ -31,6 +38,7 @@ public class CarPortController {
             sendResponse(request,response,genMsgObj(FAILED,"params error"));
             return;
         }
+
 
         carPortService.add(request,response,user.getId(),carPort);
     }

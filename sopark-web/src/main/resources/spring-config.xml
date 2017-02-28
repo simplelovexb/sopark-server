@@ -82,7 +82,7 @@
     </aop:config>
 
     <bean class="cn.suxiangbao.sopark.spring.SpringUtils"/>
-
+    <bean class="cn.suxiangbao.sopark.json.JsonUtil"/>
     <import resource="classpath:spring-config-cache.xml"/>
     <import resource="classpath:spring-config-shiro.xml"/>
     <import resource="appContext-mongo.xml"/>

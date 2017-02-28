@@ -32,7 +32,7 @@
                         <!-- 附件目录服务 -->
                         <contextHandler implementation="org.eclipse.jetty.webapp.WebAppContext">
                             <contextPath>/static/img</contextPath>
-                            <resourceBase>/var/sopark/img/</resourceBase>
+                            <resourceBase>E:\static</resourceBase>
                         </contextHandler>
                     </contextHandlers>
                     <stopKey>shutdown </stopKey>

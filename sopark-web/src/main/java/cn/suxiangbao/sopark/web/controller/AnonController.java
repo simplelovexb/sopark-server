@@ -86,4 +86,12 @@ public class AnonController {
         }
         geoService.getNearCarPort(request,response,coordinate,dis,page);
     }
+
+    @RequestMapping(value = "/logout")
+    public void logout (HttpServletRequest request,HttpServletResponse response){
+        if (SecurityUtils.getSubject().isAuthenticated()){
+            SecurityUtils.getSubject().logout();
+        }
+        sendResponse(request,response,genMsgObj(SUCCESS,"退出成功"));
+    }
 }

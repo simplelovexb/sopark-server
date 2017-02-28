@@ -4,6 +4,7 @@ package cn.suxiangbao.sopark.entity;
 import javax.xml.crypto.Data;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/1/2.
@@ -31,6 +32,9 @@ public class CarPort {
 
     private Date createDate;
     private Date updateDate;
+
+    private String pic1;
+    private String pic2;
 
     public Long getPid() {
         return pid;
@@ -104,6 +108,22 @@ public class CarPort {
         this.updateDate = updateDate;
     }
 
+    public String getPic1() {
+        return pic1;
+    }
+
+    public void setPic1(String pic1) {
+        this.pic1 = pic1;
+    }
+
+    public String getPic2() {
+        return pic2;
+    }
+
+    public void setPic2(String pic2) {
+        this.pic2 = pic2;
+    }
+
     @Override
     public String toString() {
         return "CarPort{" +
@@ -116,6 +136,8 @@ public class CarPort {
                 ", verify=" + verify +
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +
+                ", pic1='" + pic1 + '\'' +
+                ", pic2='" + pic2 + '\'' +
                 '}';
     }
 
@@ -126,7 +148,6 @@ public class CarPort {
         public static final String FIELD_OWNER = "owner";
         public static final String FIELD_NAME = "name";
         public static final String FIELD_COMMENT = "comment";
-        public static final String FIELD_PICS = "pic";
 
     }
 

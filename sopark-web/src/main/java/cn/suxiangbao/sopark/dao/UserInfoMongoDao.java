@@ -23,8 +23,18 @@ public class UserInfoMongoDao extends BaseMongoDao<UserInfo> {
     }
 
     @Override
+    public void initMaxId() {
+
+    }
+
+    @Override
     protected MongoTemplate getTemplate() {
         return this.template;
+    }
+
+    @Override
+    public long getNextId() {
+        return 0;
     }
 
     public UserInfo findByUsername(String username) throws Exception {
